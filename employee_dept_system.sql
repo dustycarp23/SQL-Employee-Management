@@ -36,7 +36,7 @@ CREATE TABLE employee (
     FOREIGN KEY (dept_id) REFERENCES department(dept_id)); -- Constraint: Foreign Key 
 
 -- Show the structure of the table
-DESCRIBE employee;
+DESC employee;
 -- Show all tables in the database
 SHOW TABLES;
 
@@ -199,4 +199,5 @@ DELETE FROM employee WHERE emp_id = 106;
 
 -- DROP TABLE (Destroy table entirely)
 -- DROP TABLE employee; give me the suitable name for this for github
+
 
