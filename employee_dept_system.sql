@@ -23,8 +23,7 @@ SHOW DATABASES;
 CREATE TABLE department (
     dept_id INT PRIMARY KEY,          -- Constraint: Primary Key
     dept_name VARCHAR(50) NOT NULL,   -- Constraint: Not Null
-    location VARCHAR(50)
-);
+    location VARCHAR(50));
 
 -- Create Employee Table (Child Table)
 CREATE TABLE employee (
@@ -34,8 +33,7 @@ CREATE TABLE employee (
     hire_date DATE,
     dept_id INT,
     manager_id INT,                   -- For Self Join (Who is the boss?)
-    FOREIGN KEY (dept_id) REFERENCES department(dept_id) -- Constraint: Foreign Key
-);
+    FOREIGN KEY (dept_id) REFERENCES department(dept_id)); -- Constraint: Foreign Key 
 
 -- Show the structure of the table
 DESCRIBE employee;
@@ -74,7 +72,7 @@ SELECT name AS Employee_Name, salary AS Annual_Salary FROM employee;
 
 -- Select with Condition (WHERE) and Logical Operators (AND, OR, NOT)
 SELECT * FROM employee 
-WHERE dept_id = 1 AND salary > 70000;
+WHERE dept_id = 1 AND salary > 60000;
 
 SELECT * FROM employee 
 WHERE dept_id = 1 OR dept_id = 2;
@@ -113,19 +111,17 @@ SELECT 
     SUM(salary) AS Total_Payroll,
     AVG(salary) AS Average_Salary,
     MAX(salary) AS Highest_Paid,
-    MIN(salary) AS Lowest_Paid
-FROM employee;
+    MIN(salary) AS Lowest_Paid FROM employee;
 
 -- GROUP BY (Count employees per department)
 SELECT dept_id, COUNT(*) AS emp_count 
-FROM employee 
-GROUP BY dept_id;
+FROM employee GROUP BY dept_id;
 
 -- HAVING (Filter groups: Only depts with avg salary > 60k)
 SELECT dept_id, AVG(salary) 
 FROM employee 
 GROUP BY dept_id 
-HAVING AVG(salary) > 60000;
+HAVING AVG(salary) > 65000;
 
 -- ==========================================
 -- 7. JOIN QUERIES
@@ -164,8 +160,7 @@ JOIN employee e2 ON e1.manager_id = e2.emp_id;
 -- ==========================================
 
 -- EXISTS (Find departments that have employees)
-SELECT dept_name FROM department d
-WHERE EXISTS (SELECT 1 FROM employee e WHERE e.dept_id = d.dept_id);
+SELECT dept_name FROM department d WHERE EXISTS (SELECT 1 FROM employee e WHERE e.dept_id = d.dept_id);
 
 -- ==========================================
 -- 9. SET OPERATIONS
@@ -204,3 +199,4 @@ DELETE FROM employee WHERE emp_id = 106;
 
 -- DROP TABLE (Destroy table entirely)
 -- DROP TABLE employee; give me the suitable name for this for github
+
